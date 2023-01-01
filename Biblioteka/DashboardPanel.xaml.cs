@@ -182,7 +182,16 @@ namespace Biblioteka
         {
             if (MessageBox.Show("Czy na pewno chcesz usunąć wszystkie dane czytelników?\nUwaga tej czynności nie da się cofnąć!", "", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
-                MessageBox.Show("YES");
+                // readers TABLE TRUNCATION
+                var dbPathList = System.Reflection.Assembly.GetEntryAssembly().Location.ToString().Split('\\').ToList();
+                dbPathList.RemoveRange(dbPathList.Count - 4, 4);
+                var dbPath = string.Join("\\", dbPathList);
+
+                SqlConnection myConnection = new SqlConnection($"Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename={dbPath}\\baza.mdf;Integrated Security=True;Connect Timeout=30");
+                myConnection.Open();
+                new SqlCommand($"TRUNCATE TABLE readers;", myConnection).ExecuteNonQuery();
+                myConnection.Close();
+                myConnection.Dispose();
             }
         }
 
@@ -190,7 +199,16 @@ namespace Biblioteka
         {
             if (MessageBox.Show("Czy na pewno chcesz usunąć wszystkie dane książek?\nUwaga tej czynności nie da się cofnąć!", "", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
-                MessageBox.Show("YES");
+                // books TABLE TRUNCATION
+                var dbPathList = System.Reflection.Assembly.GetEntryAssembly().Location.ToString().Split('\\').ToList();
+                dbPathList.RemoveRange(dbPathList.Count - 4, 4);
+                var dbPath = string.Join("\\", dbPathList);
+
+                SqlConnection myConnection = new SqlConnection($"Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename={dbPath}\\baza.mdf;Integrated Security=True;Connect Timeout=30");
+                myConnection.Open();
+                new SqlCommand($"TRUNCATE TABLE books;", myConnection).ExecuteNonQuery();
+                myConnection.Close();
+                myConnection.Dispose();
             }
         }
 
