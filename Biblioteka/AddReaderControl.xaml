@@ -1,0 +1,24 @@
+﻿<UserControl
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Biblioteka" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:System="clr-namespace:System;assembly=System.Runtime" x:Class="Biblioteka.AddReaderControl"
+             mc:Ignorable="d"
+             d:DesignHeight="362" d:DesignWidth="760">
+    <Grid>
+        <TextBox x:Name="imie" HorizontalAlignment="Left" Margin="235,47,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="144" materialDesign:HintAssist.Hint="Imię"/>
+        <TextBox x:Name="nazwisko" HorizontalAlignment="Left" Margin="235,110,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="144" materialDesign:HintAssist.Hint="Nazwisko"/>
+        <TextBox x:Name="adres" HorizontalAlignment="Left" Margin="411,47,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="144" materialDesign:HintAssist.Hint="Adres Zamieszkania"/>
+        <Button x:Name="button" Content="Resetuj Dane" HorizontalAlignment="Left" Margin="235,245,0,0" VerticalAlignment="Top" Background="#FFB73A3A" BorderBrush="#FFB73A3A" Click="resetData" RenderTransformOrigin="0.553,-0.274" Cursor="Hand"/>
+        <Button x:Name="button1" Content="Dodaj czytelnika" HorizontalAlignment="Left" Margin="419,245,0,0" VerticalAlignment="Top" Click="addReader"/>
+        <ComboBox x:Name="plec" HorizontalAlignment="Left" Margin="411,110,0,0" VerticalAlignment="Top" Width="144" materialDesign:HintAssist.Hint="Płeć">
+            <System:String>Kobieta</System:String>
+            <System:String>Mężczyzna</System:String>
+        </ComboBox>
+        <TextBox x:Name="email" HorizontalAlignment="Left" Margin="235,156,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="320" materialDesign:HintAssist.Hint="Adres email" materialDesign:HintAssist.IsFloating="True"/>
+
+    </Grid>
+</UserControl>

@@ -1,0 +1,18 @@
+﻿<UserControl x:Class="Biblioteka.AddBookControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Biblioteka"
+             mc:Ignorable="d" 
+             d:DesignHeight="362" d:DesignWidth="760"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
+    <Grid>
+        <TextBox x:Name="title" HorizontalAlignment="Center" Margin="0,73,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="260" materialDesign:HintAssist.Hint="Tytuł" Height="35"/>
+        <TextBox x:Name="author" HorizontalAlignment="Center" Margin="0,131,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="260" materialDesign:HintAssist.Hint="Autor" Height="35"/>
+        <Button x:Name="resetBtn" Content="Resetuj dane" HorizontalAlignment="Left" Margin="250,281,0,0" VerticalAlignment="Top" Background="#FFB73A3A" Click="resetData"/>
+        <Button x:Name="submitBtn" Content="Zatwierdź" HorizontalAlignment="Left" Margin="416,281,0,0" VerticalAlignment="Top" Click="submitData"/>
+        <TextBox x:Name="genre" HorizontalAlignment="Center" Margin="0,181,0,0" VerticalAlignment="Top" Width="260" materialDesign:HintAssist.Hint="Gatunek" Height="35"/>
+
+    </Grid>
+</UserControl>
