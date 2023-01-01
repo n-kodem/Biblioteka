@@ -211,7 +211,22 @@ namespace Biblioteka
                 myConnection.Dispose();
             }
         }
+        private void truncateBorrowings(object sender, RoutedEventArgs e)
+        {
+            if (MessageBox.Show("Czy na pewno chcesz usunąć wszystkie dane wyporzyczeń?\nUwaga tej czynności nie da się cofnąć!", "", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            {
+                // books TABLE TRUNCATION
+                var dbPathList = System.Reflection.Assembly.GetEntryAssembly().Location.ToString().Split('\\').ToList();
+                dbPathList.RemoveRange(dbPathList.Count - 4, 4);
+                var dbPath = string.Join("\\", dbPathList);
 
+                SqlConnection myConnection = new SqlConnection($"Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename={dbPath}\\baza.mdf;Integrated Security=True;Connect Timeout=30");
+                myConnection.Open();
+                new SqlCommand($"TRUNCATE TABLE borrowings;", myConnection).ExecuteNonQuery();
+                myConnection.Close();
+                myConnection.Dispose();
+            }
+        }
         private void ksiazka_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
@@ -357,5 +372,7 @@ namespace Biblioteka
             data_wybor_wyp.IsDropDownOpen = false;
             Keyboard.ClearFocus();
         }
+
+        
     }
 }
