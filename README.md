@@ -63,5 +63,18 @@ erDiagram
     }
 ```
 # Testy:
+## Checking if user can log with invalid data
 ![Image alt text](/testy_zdjecia/login_inv.png "Invalid login")
+## Checking if user can add books
+![Image alt text](/testy_zdjecia/adding_book.png "Adding book")
+## Checking if user can add readers
+![Image alt text](/testy_zdjecia/adding_user.png "Adding user")
+## Checking if program displays books correctly
+![Image alt text](/testy_zdjecia/bookbase_view.png "Bookbase view")
+## Checking if program displays borrowings correctly
+![Image alt text](/testy_zdjecia/borrowings_view.png "Borrowings view")
+## Checking if program displays readers correctly
+![Image alt text](/testy_zdjecia/readers_view.png "Readers view")
+## Checking if program displays settings correctly
+![Image alt text](/testy_zdjecia/settings_view.png "Settings view")
 
