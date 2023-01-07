@@ -29,7 +29,11 @@ namespace Biblioteka
         {
             InitializeComponent();
         }
-
+        /// <summary>
+        /// Metoda <c>EncryptString</c> szyfruje tekst na bazie klucza podanego w pierwszym parametrze z użyciem szyfrowania Base64
+        /// </summary>
+        /// <param name="key">Klucz do szyfrowania tekstu</param>
+        /// <param name="plainText">Tekst do zaszyfrowania</param>
         public static string EncryptString(string key, string plainText)
         {
             byte[] iv = new byte[16];
@@ -58,13 +62,20 @@ namespace Biblioteka
 
             return Convert.ToBase64String(array);
         }
-
+        /// <summary>
+        /// Metoda <c>GenerateChar</c> generuje i zwraca losowy znak z przedziału A-Z
+        /// </summary>
+        /// <param name="rng">Instancja klasy Random</param>
         public char GenerateChar(Random rng)
         {
             // 'Z' + 1 because the range is exclusive
             return (char)(rng.Next('A', 'Z' + 1));
         }
-
+        ///<summary>
+        /// Metoda <c>GenerateString</c> generuje i zwraca losowy ciąg znaków.
+        /// </summary> 
+        /// <param name="rng">Instancja klasy Random</param>
+        /// <param name="length">Długość losowego ciągu znaków</param>
         public string GenerateString(Random rng, int length)
         {
             char[] letters = new char[length];
@@ -74,9 +85,16 @@ namespace Biblioteka
             }
             return new string(letters);
         }
-
+        /// <summary>
+        /// Metoda <c>addUser</c> dodaje użytkownika do bazy danych.
+        /// </summary>
         private void addUser(object sender, RoutedEventArgs e)
         {
+            if (login.Text == "" || pwd.Text == "" || pwdConfirm.Text == "" || privileges.Text == "" || pwd.Text!=pwdConfirm.Text)
+            {
+                MessageBox.Show("Nieprawidłowe dane");
+                return;
+            }
             var dbPathList = System.Reflection.Assembly.GetEntryAssembly().Location.ToString().Split('\\').ToList();
             dbPathList.RemoveRange(dbPathList.Count - 4, 4);
             var dbPath = string.Join("\\", dbPathList);
@@ -100,7 +118,9 @@ namespace Biblioteka
 
             MessageBox.Show("Użytkownik został dodany pomyślnie!", "", MessageBoxButton.OK);
         }
-
+        /// <summary>
+        /// Metoda <c>resetData</c> resetuje dane z pól tekstowych Kontrolki
+        /// </summary>
         private void resetData(object sender, RoutedEventArgs e)
         {
             login.Text = "";

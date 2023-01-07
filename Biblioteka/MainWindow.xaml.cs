@@ -23,8 +23,12 @@ namespace Biblioteka
     /// </summary>
     public partial class MainWindow : Window
     {
-        
 
+        ///<summary>
+        /// Metoda <c>DecryptString</c> odszyfrowuje zaszyfrowany tekst na podstawie klucza
+        /// </summary> 
+        /// <param name="key">Klucz do odszyfrowania tekstu</param>
+        /// <param name="cipherText">Teks do odszyfrowania</param>
         public static string DecryptString(string key, string cipherText)
         {
             byte[] iv = new byte[16];
@@ -49,11 +53,18 @@ namespace Biblioteka
                 }
             }
         }
-
+        ///<summary>
+        /// Metoda <c>SwitchPanels</c> Przeskakuje między panelem logowania, a panelem głównym
+        /// </summary> 
         public void SwitchPanels()
         {
             loginPanel.Visibility = loginPanel.Visibility ^ dashPanel.Visibility ^ (dashPanel.Visibility = loginPanel.Visibility);
         }
+        ///<summary>
+        /// Metoda <c>Login</c> podejmuje próby zalogowania użytkownika do programu, w przypadku nieprawidłowych danych wyświetla stosowny komunikat.
+        /// </summary> 
+        /// <param name="login">Login do konta</param>
+        /// <param name="password">Hasło do konta</param>
         public void Login(string login, string password)
         {
             var dbPathList = System.Reflection.Assembly.GetEntryAssembly().Location.ToString().Split('\\').ToList();
@@ -92,6 +103,9 @@ namespace Biblioteka
             myConnection.Dispose();
 
         }
+        ///<summary>
+        /// Metoda <c>logOut</c> wylogowywuje użytkownika po wciśnieciu stosownego przycisku.
+        /// </summary>
         public void logOut()
         {
             // reset Data
@@ -101,6 +115,9 @@ namespace Biblioteka
         {
             InitializeComponent();
         }
+        ///<summary>
+        /// Metoda <c>loseFocus</c> wyłącza skupienie na elementach interaktywnych po naciśnięciu na tło.
+        /// </summary>
         private void loseFocus(object sender, MouseButtonEventArgs e)
         {
             Keyboard.ClearFocus();

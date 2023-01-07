@@ -25,7 +25,9 @@ namespace Biblioteka
         {
             InitializeComponent();
         }
-
+        ///<summary>
+        /// Metoda <c>logOut</c> wykonywuje metode logOut z mainWindow po kliknięciu w przycisk wylogowywania się
+        /// </summary>
         private void logOut(object sender, RoutedEventArgs e)
         {
             ((MainWindow)Application.Current.MainWindow).logOut();
@@ -52,6 +54,11 @@ namespace Biblioteka
 
 
         }
+        ///<summary>
+        /// Metoda <c>searchFor</c> przeszukuje wybraną tabele w poszukiwaniu podanego tekstu
+        /// </summary>
+        /// <param name="colNum">numer tabeli do przeszukania</param>
+        /// <param name="text">tekst do znalezienia</param>
         public List<DataRow> searchFor(int colNum,string text)
         {
             List<string> tableNames = new List<string> { "books","borrowings","readers"};
@@ -117,7 +124,9 @@ namespace Biblioteka
 
             return output;
         }
-
+        ///<summary>
+        /// Metoda <c>reloadData</c> przeładowywuje dane wszystkich tabel
+        /// </summary>
         public void reloadData()
         {
             bookBase.Items.Clear();
@@ -201,12 +210,16 @@ namespace Biblioteka
 
 
         }
-
+        ///<summary>
+        /// Metoda <c>loadData</c> przeładowywuje dane wszystkich tabel po zalogowaniu
+        /// </summary>
         private void loadData(object sender, DependencyPropertyChangedEventArgs e)
         {
             reloadData();
         }
-
+        ///<summary>
+        /// Metoda <c>truncateReaders</c> usuwa wszystkie dane z tabeli readers po wcześniejszym zatwierdzeniu.
+        /// </summary>
         private void truncateReaders(object sender, RoutedEventArgs e)
         {
             if (MessageBox.Show("Czy na pewno chcesz usunąć wszystkie dane czytelników?\nUwaga tej czynności nie da się cofnąć!", "", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
@@ -223,7 +236,9 @@ namespace Biblioteka
                 myConnection.Dispose();
             }
         }
-
+        ///<summary>
+        /// Metoda <c>truncateBooks</c> usuwa wszystkie dane z tabeli books po wcześniejszym zatwierdzeniu.
+        /// </summary>
         private void truncateBooks(object sender, RoutedEventArgs e)
         {
             if (MessageBox.Show("Czy na pewno chcesz usunąć wszystkie dane książek?\nUwaga tej czynności nie da się cofnąć!", "", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
@@ -240,6 +255,9 @@ namespace Biblioteka
                 myConnection.Dispose();
             }
         }
+        ///<summary>
+        /// Metoda <c>truncateBorrowings</c> usuwa wszystkie dane z tabeli borrowings po wcześniejszym zatwierdzeniu.
+        /// </summary>
         private void truncateBorrowings(object sender, RoutedEventArgs e)
         {
             if (MessageBox.Show("Czy na pewno chcesz usunąć wszystkie dane wyporzyczeń?\nUwaga tej czynności nie da się cofnąć!", "", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
@@ -256,11 +274,10 @@ namespace Biblioteka
                 myConnection.Dispose();
             }
         }
-        private void ksiazka_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
+        private void ksiazka_SelectionChanged(object sender, SelectionChangedEventArgs e){}
+        ///<summary>
+        /// Metoda <c>imie_SelectionChanged</c> wyłącza możliwość edycji pola z nazwiskiem, gdy imie nie zostało wybrane
+        /// </summary>
         private void imie_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (imie.SelectedIndex != -1)
@@ -270,7 +287,9 @@ namespace Biblioteka
 
             nazwisko.SelectedIndex = -1;
         }
-
+        ///<summary>
+        /// Metoda <c>readersSearchBox_TextChanged</c> służy do automatycznego wyszukiwania danych w tabeli readers
+        /// </summary>
         private void readersSearchBox_TextChanged(object sender, TextChangedEventArgs e)
         {
 
@@ -280,7 +299,9 @@ namespace Biblioteka
                 readersBase.Items.Add(item);
             }
         }
-
+        ///<summary>
+        /// Metoda <c>booksSearchBox_TextChanged</c> służy do automatycznego wyszukiwania danych w tabeli books
+        /// </summary>
         private void booksSearchBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             bookBase.Items.Clear();
@@ -289,7 +310,9 @@ namespace Biblioteka
                 bookBase.Items.Add(item);
             }
         }
-
+        ///<summary>
+        /// Metoda <c>borrowingsSearchBox_TextChanged</c> służy do automatycznego wyszukiwania danych w tabeli borrowings
+        /// </summary>
         private void borrowingsSearchBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             borrowingsBase.Items.Clear();
@@ -299,11 +322,10 @@ namespace Biblioteka
             }
         }
 
-        private void nazwisko_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
+        private void nazwisko_SelectionChanged(object sender, SelectionChangedEventArgs e) { }
+        ///<summary>
+        /// Metoda <c>load_borrow_imie_data</c> po kliknięciu w kontrolkę ładuje do niej dostępne imiona
+        /// </summary>
         private void load_borrow_imie_data(object sender, EventArgs e)
         {
             //
@@ -324,7 +346,9 @@ namespace Biblioteka
             myConnection.Close();
             myConnection.Dispose();
         }
-
+        ///<summary>
+        /// Metoda <c>load_borrow_nazwisko_data</c> po kliknięciu w kontrolkę ładuje do niej dostępne nazwiska
+        /// </summary>
         private void load_borrow_nazwisko_data(object sender, EventArgs e)
         {
             //
@@ -348,7 +372,9 @@ namespace Biblioteka
             myConnection.Close();
             myConnection.Dispose();
         }
-
+        ///<summary>
+        /// Metoda <c>load_borrow_ksiazka_data</c> po kliknięciu w kontrolkę ładuje do niej dostępne książki
+        /// </summary>
         private void load_borrow_ksiazka_data(object sender, EventArgs e)
         {
             ksiazka.Items.Clear();
@@ -368,7 +394,9 @@ namespace Biblioteka
             myConnection.Close();
             myConnection.Dispose();
         }
-
+        ///<summary>
+        /// Metoda <c>addBorrowing</c> dodaje wypożyczenie do bazy danych o ile dane są poprawne, w przeciwnym wypadku wyświetla stosowny komunikat
+        /// </summary>
         private void addBorrowing(object sender, RoutedEventArgs e)
         {
             // Sprawdzenie poprawności danych
@@ -422,7 +450,9 @@ namespace Biblioteka
             //*****
 
         }
-
+        ///<summary>
+        /// Metoda <c>resetBorrowingData</c> usuwa dane z pól edycyjnych panelu dodawania wypożyczenia.
+        /// </summary>
         private void resetBorrowingData(object sender, RoutedEventArgs e)
         {
             imie.Text = "";
@@ -430,7 +460,9 @@ namespace Biblioteka
             ksiazka.Text = "";
             data_wybor_wyp.Text = "";
         }
-
+        ///<summary>
+        /// Metoda <c>data_wybor_wyp_PreviewGotKeyboardFocus</c> zapobiega wpisywaniu daty ręcznie przez użytkownika
+        /// </summary>
         private void data_wybor_wyp_PreviewGotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
         {
             // Cancel the event to prevent the text from being entered
@@ -438,21 +470,20 @@ namespace Biblioteka
             // Set the IsDropDownOpen property to true to open the dropdown
             data_wybor_wyp.IsDropDownOpen = true;
         }
-
+        ///<summary>
+        /// Metoda <c>data_wybor_wyp_SelectedDateChanged</c> usuwa fokus na kontrolkę po wybraniu daty
+        /// </summary>
         private void data_wybor_wyp_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
             data_wybor_wyp.IsDropDownOpen = false;
             Keyboard.ClearFocus();
         }
-
-        private void usersShortcutSelectionChanged(object sender, SelectionChangedEventArgs e)
+        ///<summary>
+        /// Metoda <c>TabControl_SelectionChanged</c> przeładowywuje dane tabel, po wybraniu zakładki
+        /// </summary>
+        private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
-        }
-
-        private void readerssShortcutSelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
+            reloadData();
         }
     }
 }

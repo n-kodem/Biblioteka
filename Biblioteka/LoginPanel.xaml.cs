@@ -12,12 +12,14 @@ namespace Biblioteka
         {
             InitializeComponent();
         }
-
+        ///<summary>
+        /// Metoda <c>LogIn</c> loguje użytkownika na podstawie wprowadzonych przez niego danych.
+        /// </summary> 
         private void logIn(object sender, RoutedEventArgs e)
         {
-            ((MainWindow)Application.Current.MainWindow).Login(login.Text,password.Text);
+            ((MainWindow)Application.Current.MainWindow).Login(login.Text,password.Password);
             login.Text = "";
-            password.Text = "";
+            password.Password = "";
         }
     }
 }

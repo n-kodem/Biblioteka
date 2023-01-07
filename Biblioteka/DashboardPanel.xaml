@@ -82,7 +82,7 @@
     </UserControl.Resources>
 
     <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Name="stack">
-        <TabControl Style="{DynamicResource TabControlStyle1}" Height="{Binding ActualHeight, ElementName=dashboard, Mode=OneWay}" Width="{Binding Width, ElementName=stack, Mode=OneWayToSource}">
+        <TabControl Style="{DynamicResource TabControlStyle1}" Height="{Binding ActualHeight, ElementName=dashboard, Mode=OneWay}" Width="{Binding Width, ElementName=stack, Mode=OneWayToSource}" SelectionChanged="TabControl_SelectionChanged">
             <TabItem Header="Wypożyczenie książki">
                 <Grid>
                     <ComboBox x:Name="imie" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,21,0,0" Height="45" materialDesign:HintAssist.Hint="Imie" materialDesign:HintAssist.IsFloating="True" SelectionChanged="imie_SelectionChanged" Width="300" DropDownOpened="load_borrow_imie_data"/>
@@ -118,7 +118,7 @@
                 <Grid Background="#FFE5E5E5">
                     <TextBox x:Name="booksSearchBox" Margin="0,0,0,5" Background="White" materialDesign:HintAssist.Hint="Szukaj" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontSize="18" Width="750" TextChanged="booksSearchBox_TextChanged"/>
 
-                    <DataGrid x:Name="bookBase" Margin="10,10,10,100" ScrollViewer.HorizontalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Visible" IsHitTestVisible="False" >
+                    <DataGrid x:Name="bookBase" Margin="10,10,10,100" ScrollViewer.HorizontalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Visible" IsReadOnly="True">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Identyfikator" Binding="{Binding id}" Width="Auto"></DataGridTextColumn>
                             <DataGridTextColumn Header="Tytuł" Width="Auto" Binding="{Binding tytul}"></DataGridTextColumn>
@@ -136,7 +136,7 @@
                         <ColumnDefinition Width="41*"/>
                     </Grid.ColumnDefinitions>
                     <TextBox x:Name="readersSearchBox" Margin="0,0,0,5" Background="White" TextChanged="readersSearchBox_TextChanged" materialDesign:HintAssist.Hint="Szukaj" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontSize="18" Width="750" Grid.ColumnSpan="2"/>
-                    <DataGrid x:Name="readersBase" Margin="10,10,10,100" ScrollViewer.HorizontalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Visible" IsHitTestVisible="False" Grid.ColumnSpan="2">
+                    <DataGrid x:Name="readersBase" Margin="10,10,10,100" ScrollViewer.HorizontalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Visible" Grid.ColumnSpan="2" IsReadOnly="True">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Identyfikator" Binding="{Binding id}" Width="Auto"></DataGridTextColumn>
                             <DataGridTextColumn Header="Imie" Width="Auto" Binding="{Binding imie}"></DataGridTextColumn>
@@ -146,6 +146,7 @@
                             <DataGridTextColumn Header="Adres" Width="Auto" Binding="{Binding adres}"></DataGridTextColumn>
 
                         </DataGrid.Columns>   
+                        
                     </DataGrid>
                 </Grid>
             </TabItem>
@@ -153,7 +154,7 @@
                 <Grid Background="#FFE5E5E5">
                     <TextBox x:Name="borrowingsSearchBox" Margin="0,303,0,5" Background="White" materialDesign:HintAssist.Hint="Szukaj" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontSize="18" Width="750" TextChanged="borrowingsSearchBox_TextChanged"/>
 
-                    <DataGrid x:Name="borrowingsBase" Margin="10,10,10,100" ScrollViewer.HorizontalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Visible" IsHitTestVisible="False">
+                    <DataGrid x:Name="borrowingsBase" Margin="10,10,10,100" ScrollViewer.HorizontalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Visible" IsReadOnly="True">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Imie" Width="Auto" Binding="{Binding imie}"></DataGridTextColumn>
                             <DataGridTextColumn Header="Nazwisko" Width="Auto" Binding="{Binding nazwisko}"></DataGridTextColumn>

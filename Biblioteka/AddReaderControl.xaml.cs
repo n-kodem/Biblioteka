@@ -27,8 +27,16 @@ namespace Biblioteka
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Metoda <c>addReader</c> dodaje czytelnika do bazy danych.
+        /// </summary>
         private void addReader(object sender, RoutedEventArgs e)
         {
+            if (email.Text=="" || imie.Text=="" || adres.Text == "" || plec.Text == "" || nazwisko.Text == "" || !email.Text.Contains("@"))
+            {
+                MessageBox.Show("Nieprawidłowe dane");
+                return;
+            }
             var dbPathList = System.Reflection.Assembly.GetEntryAssembly().Location.ToString().Split('\\').ToList();
             dbPathList.RemoveRange(dbPathList.Count - 4, 4);
             var dbPath = string.Join("\\", dbPathList);
@@ -51,7 +59,9 @@ namespace Biblioteka
             new DashboardPanel().reloadData();
 
         }
-
+        /// <summary>
+        /// Metoda <c>resetData</c> resetuje dane z pól tekstowych Kontrolki
+        /// </summary>
         private void resetData(object sender, RoutedEventArgs e)
         {
             imie.Text = "";

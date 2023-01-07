@@ -13,7 +13,7 @@
         <TextBox x:Name="login" HorizontalAlignment="Center" Margin="0,165,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="280" Height="35" materialDesign:HintAssist.Hint="Login"
          materialDesign:HintAssist.HelperTextFontSize="12"
          materialDesign:HintAssist.IsFloating="True"/>
-        <TextBox x:Name="password" HorizontalAlignment="Center" Margin="0,225,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="280" Height="35" materialDesign:HintAssist.Hint="Hasło"
+        <PasswordBox x:Name="password" HorizontalAlignment="Center" Margin="0,225,0,0" VerticalAlignment="Top" Width="280" Height="35" materialDesign:HintAssist.Hint="Hasło"
          materialDesign:HintAssist.HelperTextFontSize="12"
          materialDesign:HintAssist.IsFloating="True"/>
         <Button x:Name="button" Content="Zaloguj" HorizontalAlignment="Center" Margin="0,300,0,0" VerticalAlignment="Top" Height="50" Width="150" FontSize="24" Cursor="Hand" Click="logIn"/>

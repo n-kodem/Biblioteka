@@ -25,16 +25,25 @@ namespace Biblioteka
         {
             InitializeComponent();
         }
-
+        /// <summary>
+        /// Metoda <c>resetData</c> resetuje dane z pól tekstowych Kontrolki
+        /// </summary>
         private void resetData(object sender, RoutedEventArgs e)
         {
             title.Text = "";
             author.Text = "";
             genre.Text = "";
         }
-
+        /// <summary>
+        /// Metoda <c>submitData</c> dodaje książkę do bazy danych.
+        /// </summary>
         private void submitData(object sender, RoutedEventArgs e)
         {
+            if (title.Text == "" || author.Text == "" || genre.Text == "")
+            {
+                MessageBox.Show("Nieprawidłowe dane");
+                return;
+            }
             //******
             var dbPathList = System.Reflection.Assembly.GetEntryAssembly().Location.ToString().Split('\\').ToList();
             dbPathList.RemoveRange(dbPathList.Count - 4, 4);
