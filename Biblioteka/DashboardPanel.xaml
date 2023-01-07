@@ -158,7 +158,7 @@
                             <DataGridTextColumn Header="Imie" Width="Auto" Binding="{Binding imie}"></DataGridTextColumn>
                             <DataGridTextColumn Header="Nazwisko" Width="Auto" Binding="{Binding nazwisko}"></DataGridTextColumn>
                             <DataGridTextColumn Header="Książka" Width="Auto" Binding="{Binding book}"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Data Wypożyczenia" Width="Auto" Binding="{Binding borrotDate}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Data Wypożyczenia" Width="Auto" Binding="{Binding borrowDate}"></DataGridTextColumn>
                             <DataGridTextColumn Header="Data Zwrotu" Width="Auto" Binding="{Binding returnDate}"></DataGridTextColumn>
                         </DataGrid.Columns>   
                     </DataGrid>
@@ -166,16 +166,17 @@
             </TabItem>
             <TabItem Header="Ustawienia" FontWeight="Bold">
                 <Grid>
-                    <materialDesign:Card Margin="10,10,437,10">
+                    <materialDesign:Card HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                         <Grid>
+                            <Label Margin="34,10,34,0" FontSize="36" Width="354" HorizontalContentAlignment="Center" VerticalAlignment="Top">Reset Tabel</Label>
                             <Label Margin="0,125,0,0" Content="Baza Książek" Height="30" HorizontalAlignment="Center" VerticalAlignment="Top" Width="120"/>
                             <Button Margin="0,160,0,0" x:Name="resetBooksData" Content="Resetuj Dane" HorizontalAlignment="Center" VerticalAlignment="Top" Width="120" Background="#FFB73A3A" BorderBrush="#FFB73A3A" Click="truncateBooks"/>
 
-                            <Label Margin="10,125,0,0" Content="Baza Czytelników" Height="30" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120"/>
-                            <Button Margin="10,160,0,0" x:Name="resetReadersData" Content="Resetuj Dane" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Background="#FFB73A3A" BorderBrush="#FFB73A3A" Click="truncateReaders" Height="32"/>
+                            <Label Margin="150,125,0,0" Content="Baza Czytelników" Height="30" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120"/>
+                            <Button Margin="150,160,0,0" x:Name="resetReadersData" Content="Resetuj Dane" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Background="#FFB73A3A" BorderBrush="#FFB73A3A" Click="truncateReaders" Height="32"/>
 
-                            <Label Margin="0,123,10,0" Content="Baza Wyporzyczeń" Height="30" HorizontalAlignment="Right" VerticalAlignment="Top" Width="120"/>
-                            <Button Margin="0,158,10,0" x:Name="resetBorrowingsData" Content="Resetuj Dane" HorizontalAlignment="Right" VerticalAlignment="Top" Width="120" Background="#FFB73A3A" BorderBrush="#FFB73A3A" Click="truncateBorrowings" Height="34"/>
+                            <Label Margin="0,124,155,0" Content="Baza Wypożyczeń" Height="30" HorizontalAlignment="Right" VerticalAlignment="Top" Width="120"/>
+                            <Button Margin="0,159,155,0" x:Name="resetBorrowingsData" Content="Resetuj Dane" HorizontalAlignment="Right" VerticalAlignment="Top" Width="120" Background="#FFB73A3A" BorderBrush="#FFB73A3A" Click="truncateBorrowings" Height="34"/>
                         </Grid>
                     </materialDesign:Card>
                 </Grid>

@@ -43,6 +43,11 @@ namespace Biblioteka
             public string? email { set; get; }
             public string? plec { set; get; }
             public string? adres { set; get; }
+            public string? book { set; get; }
+            public string? borrowDate { set; get; }
+            public string? returnDate { set; get; }
+
+
 
 
 
@@ -54,8 +59,8 @@ namespace Biblioteka
             List<DataRow> output = new List<DataRow>();
             List<List<string>> columns = new List<List<string>> { 
                 new List<string>{ "\"tytul\"", "\"autor\"","\"gatunek\""}, 
-                new List<string>{ "\"tytul\"", "\"autor\"", "\"gatunek\"" }, 
-                new List<string> { "imie", "or nazwisko", "or email", " or plec", " or adres" } 
+                new List<string>{ "borrowings.id", "readers.imie", "readers.nazwisko", "books.autor", "books.gatunek", "borrowings.borrowDate", "borrowings.returnDate" }, 
+                new List<string> { "imie", "nazwisko", "email", "plec", "adres" } 
             };
             var dbPathList = System.Reflection.Assembly.GetEntryAssembly().Location.ToString().Split('\\').ToList();
             dbPathList.RemoveRange(dbPathList.Count - 4, 4);
@@ -63,7 +68,10 @@ namespace Biblioteka
 
             SqlConnection myConnection = new SqlConnection($"Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename={dbPath}\\baza.mdf;Integrated Security=True;Connect Timeout=30");
             myConnection.Open();
+            
             var ex = new SqlCommand($"SELECT * FROM {tableNames[colNum]} WHERE id like (\'%{text}%\') or {string.Join($" like (\'%{text}%\') or", columns[colNum])} LIKE (\'%{text}%\');", myConnection);
+            if (colNum == 1)
+                ex = new SqlCommand($"SELECT borrowings.id, readers.imie, readers.nazwisko, books.autor, books.gatunek, borrowings.borrowDate, borrowings.returnDate FROM borrowings INNER JOIN readers ON borrowings.userId = readers.id INNER JOIN books ON borrowings.bookId = books.id WHERE borrowings.id like (\'%{text}%\') or {string.Join($" like (\'%{text}%\') or  ", columns[colNum])} LIKE (\'%{text}%\');",myConnection);
             var reader = ex.ExecuteReader();
 
             while (reader.Read())
@@ -82,16 +90,11 @@ namespace Biblioteka
                     output.Add(
                         new DataRow
                         {
-                            id = reader["id"].ToString(),
-                            tytul = reader["tytul"].ToString(),
-                            autor = reader["autor"].ToString(),
-                            gatunek = reader["gatunek"].ToString(),
                             imie = reader["imie"].ToString(),
                             nazwisko = reader["nazwisko"].ToString(),
-                            email = reader["email"].ToString(),
-                            plec = reader["plec"].ToString(),
-                            adres = reader["adres"].ToString(),
-
+                            book = reader["autor"].ToString()+", "+ reader["gatunek"].ToString(),
+                            borrowDate = reader["borrowDate"].ToString(),
+                            returnDate = reader["returnDate"].ToString(),
                         }
                     );
                 else if (colNum == 2)
@@ -119,12 +122,14 @@ namespace Biblioteka
         {
             bookBase.Items.Clear();
             readersBase.Items.Clear();
+            borrowingsBase.Items.Clear();
 
 
 
 
             var books = new List<DataRow> {};
             var readers = new List<DataRow> {};
+            var borrowings = new List<DataRow> {};
 
             //
             var dbPathList = System.Reflection.Assembly.GetEntryAssembly().Location.ToString().Split('\\').ToList();
@@ -150,6 +155,28 @@ namespace Biblioteka
                 readers.Add(new DataRow { id = reader[0].ToString(), imie = reader[1].ToString(), nazwisko = reader[2].ToString(), email = reader[3].ToString(), plec = reader[4].ToString(), adres = reader[5].ToString() });
             }
 
+
+            ex = new SqlCommand($"SELECT borrowings.id, readers.imie, readers.nazwisko, books.autor, books.gatunek, borrowings.borrowDate, borrowings.returnDate FROM borrowings INNER JOIN readers ON borrowings.userId = readers.id INNER JOIN books ON borrowings.bookId = books.id;", myConnection);
+            reader.Close();
+            reader = ex.ExecuteReader();
+
+            while (reader.Read())
+            {
+                borrowings.Add(new DataRow
+                {
+                    imie = reader["imie"].ToString(),
+                    nazwisko = reader["nazwisko"].ToString(),
+                    book = reader["autor"].ToString() + ", " + reader["gatunek"].ToString(),
+                    borrowDate = reader["borrowDate"].ToString(),
+                    returnDate = reader["returnDate"].ToString(),
+                });
+            }
+
+
+            foreach (var borrow in borrowings)
+            {
+                borrowingsBase.Items.Add(borrow);
+            }
             foreach (var book in books)
             {
                 bookBase.Items.Add(book);
@@ -161,6 +188,8 @@ namespace Biblioteka
             }
 
             // add borrowings
+            
+
 
             myConnection.Close();
             myConnection.Dispose();
@@ -309,7 +338,7 @@ namespace Biblioteka
 
             SqlConnection myConnection = new SqlConnection($"Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename={dbPath}\\baza.mdf;Integrated Security=True;Connect Timeout=30");
             myConnection.Open();
-            var ex = new SqlCommand($"SELECT nazwisko FROM readers WHERE imie = '{imie.SelectedValue.ToString()}';", myConnection);
+            var ex = new SqlCommand($"SELECT nazwisko FROM readers WHERE imie = '{imie.SelectedValue}';", myConnection);
             var reader = ex.ExecuteReader();
 
             while (reader.Read())
@@ -349,6 +378,49 @@ namespace Biblioteka
                 return;
             }
 
+            var userId = "";
+            var bookId = "";
+            var borrowDate = DateTime.Now.Date;
+
+            var dbPathList = System.Reflection.Assembly.GetEntryAssembly().Location.ToString().Split('\\').ToList();
+            dbPathList.RemoveRange(dbPathList.Count - 4, 4);
+            var dbPath = string.Join("\\", dbPathList);
+
+            SqlConnection myConnection = new SqlConnection($"Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename={dbPath}\\baza.mdf;Integrated Security=True;Connect Timeout=30");
+            myConnection.Open();
+
+
+            var ex = new SqlCommand($"SELECT id FROM books WHERE tytul = '{ksiazka.Text}';", myConnection);
+            var reader = ex.ExecuteReader();
+
+            while (reader.Read())
+            {
+                bookId = reader[0].ToString();
+            }
+
+            reader.Close();
+            ex = new SqlCommand($"SELECT id FROM readers WHERE imie = '{imie.Text}' and nazwisko = '{nazwisko.Text}';", myConnection);
+            reader = ex.ExecuteReader();
+
+            while (reader.Read())
+            {
+                userId = reader[0].ToString();
+            }
+
+            reader.Close();
+            ex = new SqlCommand($"INSERT INTO borrowings(bookId,userId,borrowDate,returnDate) VALUES('{bookId}','{userId}','{borrowDate}','{data_wybor_wyp.SelectedDate}');", myConnection);
+            ex.ExecuteReader();
+            myConnection.Close();
+            myConnection.Dispose();
+
+            imie.Text = "";
+            nazwisko.Text = "";
+            ksiazka.Text = "";
+            data_wybor_wyp.Text = "";
+
+            MessageBox.Show("Książka została dodana pomyślnie!", "", MessageBoxButton.OK);
+            //*****
+
         }
 
         private void resetBorrowingData(object sender, RoutedEventArgs e)
@@ -373,6 +445,14 @@ namespace Biblioteka
             Keyboard.ClearFocus();
         }
 
-        
+        private void usersShortcutSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void readerssShortcutSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }
