@@ -62,3 +62,4 @@ erDiagram
         bool isAdmin
     }
 ```
+# Testy:
