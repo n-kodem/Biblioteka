@@ -62,6 +62,20 @@ erDiagram
         bool isAdmin
     }
 ```
+# Schemat UI
+```mermaid
+graph TD
+    A[Panel Logowania] <--> B[Panel główny]
+    B <--> C(Użytkownik wybiera kontrolkę)
+    C <-->|1| D[Baza biblioteki]
+    C <-->|2| E[Baza czytelników]
+    C <-->|3| F[Wypożyczenia]
+    C <-->|4| G[Ustawienia]
+    C <-->|5| H[Wypożyczenie książki]
+    C <-->|6| I[Dodaj książkę]
+    C <-->|7| J[Dodaj czytelnika]
+    C <-->|8| K[Dodaj użytkownika]
+```
 # Testy:
 ## Sprawdzenie, czy użytkownik może się zalogować z nieprawidłowymi danymi
 ![Image alt text](/testy_zdjecia/login_inv.png "Invalid login")
