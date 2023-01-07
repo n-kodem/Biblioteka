@@ -69,7 +69,7 @@ namespace Biblioteka
             SqlConnection myConnection = new SqlConnection($"Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename={dbPath}\\baza.mdf;Integrated Security=True;Connect Timeout=30");
             myConnection.Open();
             
-            var ex = new SqlCommand($"SELECT * FROM {tableNames[colNum]} WHERE id like (\'%{text}%\') or {string.Join($" like (\'%{text}%\') or", columns[colNum])} LIKE (\'%{text}%\');", myConnection);
+            var ex = new SqlCommand($"SELECT * FROM {tableNames[colNum]} WHERE id like (\'%{text}%\') or {string.Join($" like (\'%{text}%\') or ", columns[colNum])} LIKE (\'%{text}%\');", myConnection);
             if (colNum == 1)
                 ex = new SqlCommand($"SELECT borrowings.id, readers.imie, readers.nazwisko, books.autor, books.gatunek, borrowings.borrowDate, borrowings.returnDate FROM borrowings INNER JOIN readers ON borrowings.userId = readers.id INNER JOIN books ON borrowings.bookId = books.id WHERE borrowings.id like (\'%{text}%\') or {string.Join($" like (\'%{text}%\') or  ", columns[colNum])} LIKE (\'%{text}%\');",myConnection);
             var reader = ex.ExecuteReader();
