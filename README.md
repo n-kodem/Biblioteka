@@ -63,3 +63,18 @@ erDiagram
     }
 ```
 # Testy:
+## Sprawdzenie, czy użytkownik może się zalogować z nieprawidłowymi danymi
+![Image alt text](/testy_zdjecia/login_inv.png "Invalid login")
+## Sprawdzenie, czy użytkownik może dodać książki
+![Image alt text](/testy_zdjecia/adding_book.png "Adding book")
+## Sprawdzenie, czy użytkownik może dodać czytelników
+![Image alt text](/testy_zdjecia/adding_user.png "Adding user")
+## Sprawdzenie, czy program prawidłowo wyświetla książki
+![Image alt text](/testy_zdjecia/bookbase_view.png "Bookbase view")
+## Sprawdzenie, czy program prawidłowo wyświetla wypożyczenia
+![Image alt text](/testy_zdjecia/borrowings_view.png "Borrowings view")
+## Sprawdzenie, czy program prawidłowo czytelników książki
+![Image alt text](/testy_zdjecia/readers_view.png "Readers view")
+## Sprawdzenie, czy program prawidłowo wyświetla ustawienia
+![Image alt text](/testy_zdjecia/settings_view.png "Settings view")
+
