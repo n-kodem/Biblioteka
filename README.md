@@ -25,7 +25,7 @@ Po uruchomieniu aplikacji przed użytkownikiem wyświetli się panel logowania, 
 
 Po zalogowaniu się, użytkownik zostanie przeniesiony do głównego okna programu. Z górnego menu można wybrać interesującą nas opcję (np. wyszukiwanie książek, dodawanie nowych pozycji itp.).
 
-Aby wyszukać książkę, należy wpisać odpowiednie słowo kluczowe w polu wyszukiwania i nacisnąć przycisk "Szukaj". Rezultaty wyszukiwania zostaną wyświetlone w głównym oknie programu.
+Aby wyszukać książkę, należy wpisać odpowiednie słowo kluczowe w polu wyszukiwania, wyszukiwanie rozpocznie się automatycznie. Rezultaty wyszukiwania zostaną wyświetlone w tabeli panelu.
 
 # Diagram ERD bazy danych:
 ```mermaid
